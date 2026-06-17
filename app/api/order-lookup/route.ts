@@ -6,10 +6,15 @@ export async function POST(request: Request) {
   const body = await request.json();
   const contact = normalizeContact(String(body.contact || ""));
   if (!contact) return Response.json({ error: "Missing contact" }, { status: 400 });
+  const compactPhone = contact.replace(/[^\d]/g, "");
+  const localPhone = compactPhone.startsWith("971") ? compactPhone.slice(3).replace(/^0+/, "") : compactPhone.replace(/^0+/, "");
+  const phoneCandidates = localPhone
+    ? [`+971 ${localPhone}`, `+971${localPhone}`, `971${localPhone}`, `0${localPhone}`, localPhone]
+    : [];
 
   const orders = await prisma.order.findMany({
     where: {
-      OR: [{ email: { equals: contact } }, { phone: { equals: contact } }]
+      OR: [{ email: { equals: contact } }, { phone: { equals: contact } }, ...phoneCandidates.map((phone) => ({ phone: { equals: phone } }))]
     },
     include: { items: true },
     orderBy: { createdAt: "desc" },

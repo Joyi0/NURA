@@ -11,6 +11,7 @@
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "seed": "node prisma/seed.mjs",
+    "sync:images": "node scripts/sync-product-images.mjs",
     "social:draft": "node scripts/generate-social-draft.mjs",
     "social:draft:dry-run": "node scripts/generate-social-draft.mjs --dry-run"
   },

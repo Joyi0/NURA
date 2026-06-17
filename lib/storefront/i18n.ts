@@ -41,9 +41,12 @@ export const dictionaries = {
       title: "NURA",
       intro:
         "Refined gold-tone jewelry for modern femininity, designed for everyday elegance and understated occasions.",
+      brandStoryEyebrow: "About NURA",
+      brandStoryTitle: "Quiet luxury, shaped for modern Middle Eastern elegance.",
+      brandStoryText:
+        "NURA pairs warm white visuals, soft gold light, and refined jewelry silhouettes for women who want everyday polish without excess. Each piece is presented for real styling moments: daily wear, thoughtful gifting, evening dressing, and calm rituals of getting ready.",
+      brandStoryStats: ["Warm white editorial visuals", "Gold-tone jewelry styling", "Everyday and gifting moments"],
       cta: "Explore New Arrivals",
-      collectionsTitle: "Collections",
-      collectionsText: "Discover necklaces, earrings, bracelets, and rings curated for a quiet luxury wardrobe.",
       arrivalsTitle: "New Arrivals",
       arrivalsText: "Approved pieces are published automatically from the NURA product system.",
       viewAll: "View all"
@@ -67,7 +70,7 @@ export const dictionaries = {
       {
         title: "Quiet Details",
         text: "Considered pieces for vanity rituals, gifting, and daily wear.",
-        cta: "View collections"
+        cta: "View jewelry"
       },
       {
         title: "Evening, Understated",
@@ -100,7 +103,14 @@ export const dictionaries = {
       empty: "Your cart is empty.",
       name: "Name",
       email: "Email",
+      countryCode: "Country code",
       phone: "Phone",
+      emirate: "Emirate",
+      cityArea: "City / Area",
+      addressLine1: "Address line",
+      addressLine2: "Apartment / building (optional)",
+      country: "Country",
+      required: "Please fill in name, email, phone, and UAE delivery address.",
       total: "Total",
       checkout: "Simulated Payment",
       remove: "Remove",
@@ -134,9 +144,12 @@ export const dictionaries = {
       eyebrow: "مجوهرات فاخرة ناعمة",
       title: "NURA",
       intro: "مجوهرات بلون الذهب للمرأة العصرية، مصممة لأناقة يومية هادئة ومناسبات راقية.",
+      brandStoryEyebrow: "عن NURA",
+      brandStoryTitle: "فخامة هادئة صُممت لأناقة المرأة العصرية في الشرق الأوسط.",
+      brandStoryText:
+        "تجمع NURA بين الخلفيات الدافئة البيضاء والضوء الذهبي الناعم وتصاميم المجوهرات الراقية للمرأة التي تبحث عن لمسة يومية مصقولة بلا مبالغة. تُعرض كل قطعة لمواقف حقيقية: الإطلالات اليومية، الهدايا، المساء، ولحظات الاستعداد الهادئة.",
+      brandStoryStats: ["صور تحريرية دافئة وبيضاء", "تنسيق مجوهرات بلون الذهب", "لحظات يومية وهدايا راقية"],
       cta: "اكتشفي الجديد",
-      collectionsTitle: "المجموعات",
-      collectionsText: "اكتشفي العقود والأقراط والأساور والخواتم لإطلالة راقية وهادئة.",
       arrivalsTitle: "وصل حديثا",
       arrivalsText: "تظهر القطع المعتمدة تلقائيا من نظام منتجات NURA.",
       viewAll: "عرض الكل"
@@ -160,7 +173,7 @@ export const dictionaries = {
       {
         title: "تفاصيل هادئة",
         text: "قطع مختارة للهدية والارتداء اليومي ولحظات العناية الخاصة.",
-        cta: "عرض المجموعات"
+        cta: "عرض المجوهرات"
       },
       {
         title: "مساء راق وهادئ",
@@ -192,7 +205,14 @@ export const dictionaries = {
       empty: "السلة فارغة.",
       name: "الاسم",
       email: "البريد الإلكتروني",
+      countryCode: "رمز الدولة",
       phone: "رقم الهاتف",
+      emirate: "الإمارة",
+      cityArea: "المدينة / المنطقة",
+      addressLine1: "العنوان التفصيلي",
+      addressLine2: "الشقة / المبنى (اختياري)",
+      country: "الدولة",
+      required: "يرجى تعبئة الاسم والبريد الإلكتروني ورقم الهاتف وعنوان التوصيل داخل الإمارات.",
       total: "الإجمالي",
       checkout: "دفع تجريبي",
       remove: "إزالة",

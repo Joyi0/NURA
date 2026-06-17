@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { HeroCarousel } from "@/components/storefront/HeroCarousel";
-import { categories } from "@/lib/shared/catalog";
 import { prisma } from "@/lib/shared/prisma";
 import { formatAed } from "@/lib/shared/money";
 import { localizedProductName, mainImage, productAedPrice } from "@/lib/shared/products";
-import { homeBanners } from "@/lib/storefront/home";
-import { categoryLabel, dictionary, isLocale } from "@/lib/storefront/i18n";
+import { brandStoryImages, homeBanners } from "@/lib/storefront/home";
+import { dictionary, isLocale } from "@/lib/storefront/i18n";
 import { assetUrl } from "@/lib/shared/catalog";
 import { notFound } from "next/navigation";
 
@@ -33,19 +32,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <p>{t.home.intro}</p>
       </section>
 
-      <section className="section">
-        <div className="section-head">
-          <div>
-            <h2>{t.home.collectionsTitle}</h2>
-            <p>{t.home.collectionsText}</p>
+      <section className="section brand-story">
+        <div className="brand-story-copy">
+          <span className="eyebrow">{t.home.brandStoryEyebrow}</span>
+          <h2>{t.home.brandStoryTitle}</h2>
+          <p>{t.home.brandStoryText}</p>
+          <div className="brand-story-points">
+            {t.home.brandStoryStats.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
           </div>
         </div>
-        <div className="category-grid">
-          {categories.map((category) => (
-            <Link className="category-tile" href={`/${locale}/products?category=${category.value}`} key={category.value}>
-              <strong>{categoryLabel(category.value, locale)}</strong>
-              <span>{category.code}</span>
-            </Link>
+        <div className="brand-story-images">
+          {brandStoryImages.map((image, index) => (
+            <img src={assetUrl(image)} alt={`${t.home.brandStoryEyebrow} ${index + 1}`} key={image} />
           ))}
         </div>
       </section>

@@ -26,7 +26,7 @@ export function preferredImage(product: ProductWithImages, type: string) {
 export function detailGalleryImages(product: ProductWithImages) {
   return ["WARMWHITE", "DETAIL", "SCENE", "MODEL_WEAR"].map((type) => ({
     type,
-    path: preferredImage(product, type)?.path ?? null
+    path: preferredImage(product, type)?.path ?? fallbackImagePath(product, type)
   }));
 }
 
@@ -50,4 +50,17 @@ function imageWeight(type: string) {
   const order = ["WARMWHITE", "ECOMMERCE_WHITE", "DETAIL", "SCENE", "MODEL_WEAR", "BANNER", "SOCIAL", "RAW"];
   const index = order.indexOf(type);
   return index === -1 ? 99 : index;
+}
+
+function fallbackImagePath(product: Product, type: string) {
+  const code = product.sourceCode || product.sku.match(/BB\d+/i)?.[0] || product.name.match(/BB\d+/i)?.[0];
+  if (!code) return null;
+  const sourceCode = code.toUpperCase();
+  const paths: Record<string, string> = {
+    WARMWHITE: `image/暖白产品图/${sourceCode}-product-warmwhite.jpg`,
+    DETAIL: `image/产品细节图/${sourceCode}-detail-01.jpg`,
+    SCENE: `image/场景图/${sourceCode}-scene-01.jpg`,
+    MODEL_WEAR: `image/模特佩戴图/${sourceCode}-model-wear-01.jpg`
+  };
+  return paths[type] ?? null;
 }
