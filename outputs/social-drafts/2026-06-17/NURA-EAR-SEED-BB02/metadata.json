@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-06-17T06:07:32.723Z",
+  "date": "2026-06-17",
+  "mode": "draft-only",
+  "imageProvider": "local-branded-renderer",
+  "product": {
+    "id": "cmqgofm3l00050o2jpo75opb8",
+    "sku": "NURA-EAR-SEED-BB02",
+    "sourceCode": "BB02",
+    "category": "EARRING",
+    "name": "S925 银彩宝耳钉",
+    "titleEn": null,
+    "status": "ACTIVE",
+    "stock": 0,
+    "imageCount": 2
+  },
+  "sourceImage": {
+    "id": "cmqgofm3l00060o2j3abn9w4n",
+    "type": "WARMWHITE",
+    "path": "image/产品提取图/BB02-product-warmwhite.jpg",
+    "approved": true,
+    "sortOrder": 0
+  },
+  "reviewFlags": [
+    "English product copy is sparse; caption uses generated brand copy.",
+    "Stock is 0 or not set; confirm availability before publishing.",
+    "AI/local generated scenes require visual review before Instagram/Facebook posting.",
+    "Arabic phrase is a candidate only; human proofreading required."
+  ],
+  "publishing": {
+    "instagram": "Manual review required before posting.",
+    "facebook": "Manual review required before posting.",
+    "arabicNote": "Arabic short phrase is a candidate only. Human proofreading required before publishing."
+  },
+  "productUrl": "/en/products/cmqgofm3l00050o2jpo75opb8",
+  "images": [
+    {
+      "path": "outputs/social-drafts/2026-06-17/NURA-EAR-SEED-BB02/image-01-hero-product-scene.png",
+      "provider": "local-branded-renderer",
+      "needsReview": true,
+      "filename": "image-01-hero-product-scene.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a NURA soft-luxury jewelry social image for Hero product scene.\nInput image: image/产品提取图/BB02-product-warmwhite.jpg is the product identity reference. Preserve the exact jewelry shape, gemstone placement, gold tone, and recognisable product details.\nSubject: NURA Gemstone Earrings BB02, Earrings, SKU NURA-EAR-SEED-BB02, published product.\nScene/backdrop: warm white editorial product scene with soft marble, quiet gold accents, and generous whitespace.\nBrand style: warm white background, high whitespace, clean typography area, premium black and soft gold accents, modern Middle Eastern feminine elegance.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category.\nNo large promotional discount text. Keep the image quiet, polished, editorial, and directly usable as a social media draft.",
+      "slot": "Hero product scene",
+      "pillar": "Product Desire"
+    },
+    {
+      "path": "outputs/social-drafts/2026-06-17/NURA-EAR-SEED-BB02/image-02-product-detail-close-up.png",
+      "provider": "local-branded-renderer",
+      "needsReview": true,
+      "filename": "image-02-product-detail-close-up.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a NURA soft-luxury jewelry social image for Product detail close-up.\nInput image: image/产品提取图/BB02-product-warmwhite.jpg is the product identity reference. Preserve the exact jewelry shape, gemstone placement, gold tone, and recognisable product details.\nSubject: NURA Gemstone Earrings BB02, Earrings, SKU NURA-EAR-SEED-BB02, published product.\nScene/backdrop: macro jewelry detail on warm white silk, clean premium lighting, refined shadows.\nBrand style: warm white background, high whitespace, clean typography area, premium black and soft gold accents, modern Middle Eastern feminine elegance.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category.\nNo large promotional discount text. Keep the image quiet, polished, editorial, and directly usable as a social media draft.",
+      "slot": "Product detail close-up",
+      "pillar": "Product Desire"
+    },
+    {
+      "path": "outputs/social-drafts/2026-06-17/NURA-EAR-SEED-BB02/image-03-everyday-luxury-scene.png",
+      "provider": "local-branded-renderer",
+      "needsReview": true,
+      "filename": "image-03-everyday-luxury-scene.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a NURA soft-luxury jewelry social image for Everyday luxury scene.\nInput image: image/产品提取图/BB02-product-warmwhite.jpg is the product identity reference. Preserve the exact jewelry shape, gemstone placement, gold tone, and recognisable product details.\nSubject: NURA Gemstone Earrings BB02, Earrings, SKU NURA-EAR-SEED-BB02, published product.\nScene/backdrop: minimal vanity moment with coffee, perfume, soft neutrals, and gold-toned styling.\nBrand style: warm white background, high whitespace, clean typography area, premium black and soft gold accents, modern Middle Eastern feminine elegance.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category.\nNo large promotional discount text. Keep the image quiet, polished, editorial, and directly usable as a social media draft.",
+      "slot": "Everyday luxury scene",
+      "pillar": "Everyday Luxury"
+    },
+    {
+      "path": "outputs/social-drafts/2026-06-17/NURA-EAR-SEED-BB02/image-04-styling-suggestion.png",
+      "provider": "local-branded-renderer",
+      "needsReview": true,
+      "filename": "image-04-styling-suggestion.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a NURA soft-luxury jewelry social image for Styling suggestion.\nInput image: image/产品提取图/BB02-product-warmwhite.jpg is the product identity reference. Preserve the exact jewelry shape, gemstone placement, gold tone, and recognisable product details.\nSubject: NURA Gemstone Earrings BB02, Earrings, SKU NURA-EAR-SEED-BB02, published product.\nScene/backdrop: editorial outfit styling flat lay with white shirt, black fabric accent, soft neutral palette.\nBrand style: warm white background, high whitespace, clean typography area, premium black and soft gold accents, modern Middle Eastern feminine elegance.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category.\nNo large promotional discount text. Keep the image quiet, polished, editorial, and directly usable as a social media draft.",
+      "slot": "Styling suggestion",
+      "pillar": "Styling Guidance"
+    },
+    {
+      "path": "outputs/social-drafts/2026-06-17/NURA-EAR-SEED-BB02/image-05-brand-trust-quiet-detail.png",
+      "provider": "local-branded-renderer",
+      "needsReview": true,
+      "filename": "image-05-brand-trust-quiet-detail.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a NURA soft-luxury jewelry social image for Brand trust / quiet detail.\nInput image: image/产品提取图/BB02-product-warmwhite.jpg is the product identity reference. Preserve the exact jewelry shape, gemstone placement, gold tone, and recognisable product details.\nSubject: NURA Gemstone Earrings BB02, Earrings, SKU NURA-EAR-SEED-BB02, published product.\nScene/backdrop: gift-ready detail scene with warm white packaging mood, soft gold reflection, clean composition.\nBrand style: warm white background, high whitespace, clean typography area, premium black and soft gold accents, modern Middle Eastern feminine elegance.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category.\nNo large promotional discount text. Keep the image quiet, polished, editorial, and directly usable as a social media draft.",
+      "slot": "Brand trust / quiet detail",
+      "pillar": "Brand Trust"
+    },
+    {
+      "path": "outputs/social-drafts/2026-06-17/NURA-EAR-SEED-BB02/image-06-cta-collection-oriented.png",
+      "provider": "local-branded-renderer",
+      "needsReview": true,
+      "filename": "image-06-cta-collection-oriented.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a NURA soft-luxury jewelry social image for CTA / collection-oriented image.\nInput image: image/产品提取图/BB02-product-warmwhite.jpg is the product identity reference. Preserve the exact jewelry shape, gemstone placement, gold tone, and recognisable product details.\nSubject: NURA Gemstone Earrings BB02, Earrings, SKU NURA-EAR-SEED-BB02, published product.\nScene/backdrop: premium collection image, warm white background, restrained CTA space, polished product focus.\nBrand style: warm white background, high whitespace, clean typography area, premium black and soft gold accents, modern Middle Eastern feminine elegance.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category.\nNo large promotional discount text. Keep the image quiet, polished, editorial, and directly usable as a social media draft.",
+      "slot": "CTA / collection-oriented image",
+      "pillar": "Conversion Posts"
+    }
+  ]
+}

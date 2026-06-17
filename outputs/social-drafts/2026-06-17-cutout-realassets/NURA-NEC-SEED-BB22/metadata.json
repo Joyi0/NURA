@@ -1,0 +1,132 @@
+{
+  "generatedAt": "2026-06-17T06:27:34.962Z",
+  "date": "2026-06-17-cutout-realassets",
+  "mode": "draft-only",
+  "imageProvider": "local-branded-renderer",
+  "product": {
+    "id": "cmqgofm8p00170o2j4384jlet",
+    "sku": "NURA-NEC-SEED-BB22",
+    "sourceCode": "BB22",
+    "category": "NECKLACE",
+    "name": "925 银彩宝项链",
+    "titleEn": "925 Silver Pink Bow Gemstone Necklace",
+    "status": "ACTIVE",
+    "stock": 18,
+    "imageCount": 8
+  },
+  "sourceImage": {
+    "id": "cmqhol76v001g0otk0kqlx0eb",
+    "type": "WARMWHITE",
+    "path": "image/暖白产品图/BB22-product-warmwhite.jpg",
+    "approved": true,
+    "sortOrder": 0
+  },
+  "reviewFlags": [
+    "Images are generated from the warmwhite product extraction and require visual review before Instagram/Facebook posting.",
+    "Arabic phrase is a candidate only; human proofreading required."
+  ],
+  "publishing": {
+    "instagram": "Manual review required before posting.",
+    "facebook": "Manual review required before posting.",
+    "arabicNote": "Arabic short phrase is a candidate only. Human proofreading required before publishing."
+  },
+  "productUrl": "/en/products/cmqgofm8p00170o2j4384jlet",
+  "images": [
+    {
+      "path": "outputs/social-drafts/2026-06-17-cutout-realassets/NURA-NEC-SEED-BB22/image-01-scene-marble-vanity.png",
+      "provider": "warmwhite-cutout-on-existing-scene",
+      "needsReview": true,
+      "supportingImage": {
+        "id": "cmqhol76v001j0otke7suzahl",
+        "type": "SCENE",
+        "path": "image/场景图/BB22-scene-01.jpg",
+        "approved": false,
+        "sortOrder": 3
+      },
+      "filename": "image-01-scene-marble-vanity.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a photorealistic NURA soft-luxury jewelry lifestyle scene image for Scene image: marble vanity.\nInput image: image/暖白产品图/BB22-product-warmwhite.jpg is the exact product identity reference. Preserve the jewelry category, silhouette, gemstone placement, metal tone, proportions, and recognisable product details.\nSubject: 925 Silver Pink Bow Gemstone Necklace, Necklace, SKU NURA-NEC-SEED-BB22, published product.\nScene/backdrop: jewelry placed naturally on a warm white marble vanity with a cream silk ribbon, soft morning light, a subtle perfume bottle in the background, premium editorial product photography.\nBrand style: warm white, ivory, soft beige, clean gold accents, modern Middle Eastern feminine elegance, realistic editorial photography, premium but understated.\nComposition: no headline, no caption text, no discount badge, no watermark. The image should look like a real Instagram feed photo, not a graphic poster.\nModel requirements when applicable: realistic adult model, tasteful close crop, accessory clearly worn in the correct place for its category, natural skin texture, no exaggerated glam retouching.\nScene requirements when applicable: varied props and environments across the set, product naturally integrated into the scene, not pasted onto a blank square.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category, unreadable hands, distorted ears, distorted neck, distorted jewelry.",
+      "slot": "Scene image: marble vanity",
+      "pillar": "Product Desire"
+    },
+    {
+      "path": "outputs/social-drafts/2026-06-17-cutout-realassets/NURA-NEC-SEED-BB22/image-02-scene-gift-table.png",
+      "provider": "warmwhite-cutout-on-existing-scene",
+      "needsReview": true,
+      "supportingImage": {
+        "id": "cmqhol76v001k0otkl2h3np0b",
+        "type": "SCENE",
+        "path": "image/场景图/BB22-scene-02.jpg",
+        "approved": false,
+        "sortOrder": 4
+      },
+      "filename": "image-02-scene-gift-table.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a photorealistic NURA soft-luxury jewelry lifestyle scene image for Scene image: gift-ready table.\nInput image: image/暖白产品图/BB22-product-warmwhite.jpg is the exact product identity reference. Preserve the jewelry category, silhouette, gemstone placement, metal tone, proportions, and recognisable product details.\nSubject: 925 Silver Pink Bow Gemstone Necklace, Necklace, SKU NURA-NEC-SEED-BB22, published product.\nScene/backdrop: gift-ready jewelry scene on an ivory table with a small NURA-style jewelry box, soft gold wrapping detail, warm white background, elegant Middle Eastern soft luxury mood.\nBrand style: warm white, ivory, soft beige, clean gold accents, modern Middle Eastern feminine elegance, realistic editorial photography, premium but understated.\nComposition: no headline, no caption text, no discount badge, no watermark. The image should look like a real Instagram feed photo, not a graphic poster.\nModel requirements when applicable: realistic adult model, tasteful close crop, accessory clearly worn in the correct place for its category, natural skin texture, no exaggerated glam retouching.\nScene requirements when applicable: varied props and environments across the set, product naturally integrated into the scene, not pasted onto a blank square.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category, unreadable hands, distorted ears, distorted neck, distorted jewelry.",
+      "slot": "Scene image: gift-ready table",
+      "pillar": "Product Desire"
+    },
+    {
+      "path": "outputs/social-drafts/2026-06-17-cutout-realassets/NURA-NEC-SEED-BB22/image-03-scene-soft-neutral-outfit.png",
+      "provider": "warmwhite-cutout-on-existing-scene",
+      "needsReview": true,
+      "supportingImage": {
+        "id": "cmqhol76v001j0otke7suzahl",
+        "type": "SCENE",
+        "path": "image/场景图/BB22-scene-01.jpg",
+        "approved": false,
+        "sortOrder": 3
+      },
+      "filename": "image-03-scene-soft-neutral-outfit.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a photorealistic NURA soft-luxury jewelry lifestyle scene image for Scene image: soft neutral outfit.\nInput image: image/暖白产品图/BB22-product-warmwhite.jpg is the exact product identity reference. Preserve the jewelry category, silhouette, gemstone placement, metal tone, proportions, and recognisable product details.\nSubject: 925 Silver Pink Bow Gemstone Necklace, Necklace, SKU NURA-NEC-SEED-BB22, published product.\nScene/backdrop: jewelry styled beside a folded white shirt, soft beige fabric, black evening fabric accent, and warm gold details, polished fashion flat lay.\nBrand style: warm white, ivory, soft beige, clean gold accents, modern Middle Eastern feminine elegance, realistic editorial photography, premium but understated.\nComposition: no headline, no caption text, no discount badge, no watermark. The image should look like a real Instagram feed photo, not a graphic poster.\nModel requirements when applicable: realistic adult model, tasteful close crop, accessory clearly worn in the correct place for its category, natural skin texture, no exaggerated glam retouching.\nScene requirements when applicable: varied props and environments across the set, product naturally integrated into the scene, not pasted onto a blank square.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category, unreadable hands, distorted ears, distorted neck, distorted jewelry.",
+      "slot": "Scene image: soft neutral outfit",
+      "pillar": "Everyday Luxury"
+    },
+    {
+      "path": "outputs/social-drafts/2026-06-17-cutout-realassets/NURA-NEC-SEED-BB22/image-04-model-daylight-closeup.png",
+      "provider": "existing-model-wear",
+      "needsReview": true,
+      "supportingImage": {
+        "id": "cmqhol76v001l0otks0nrxdyw",
+        "type": "MODEL_WEAR",
+        "path": "image/模特佩戴图/BB22-model-wear-01.jpg",
+        "approved": false,
+        "sortOrder": 5
+      },
+      "filename": "image-04-model-daylight-closeup.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a photorealistic NURA soft-luxury jewelry model wearing image for Model wearing image: daylight close-up.\nInput image: image/暖白产品图/BB22-product-warmwhite.jpg is the exact product identity reference. Preserve the jewelry category, silhouette, gemstone placement, metal tone, proportions, and recognisable product details.\nSubject: 925 Silver Pink Bow Gemstone Necklace, Necklace, SKU NURA-NEC-SEED-BB22, published product.\nScene/backdrop: close-up crop of a modern Middle Eastern woman wearing the jewelry in soft daylight, cream blouse, natural skin texture, elegant minimal styling, face partially cropped to focus on the accessory.\nBrand style: warm white, ivory, soft beige, clean gold accents, modern Middle Eastern feminine elegance, realistic editorial photography, premium but understated.\nComposition: no headline, no caption text, no discount badge, no watermark. The image should look like a real Instagram feed photo, not a graphic poster.\nModel requirements when applicable: realistic adult model, tasteful close crop, accessory clearly worn in the correct place for its category, natural skin texture, no exaggerated glam retouching.\nScene requirements when applicable: varied props and environments across the set, product naturally integrated into the scene, not pasted onto a blank square.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category, unreadable hands, distorted ears, distorted neck, distorted jewelry.",
+      "slot": "Model wearing image: daylight close-up",
+      "pillar": "Styling Guidance"
+    },
+    {
+      "path": "outputs/social-drafts/2026-06-17-cutout-realassets/NURA-NEC-SEED-BB22/image-05-model-evening-neutral.png",
+      "provider": "existing-model-wear",
+      "needsReview": true,
+      "supportingImage": {
+        "id": "cmqhol76v001m0otkztmikmie",
+        "type": "MODEL_WEAR",
+        "path": "image/模特佩戴图/BB22-model-wear-02.jpg",
+        "approved": false,
+        "sortOrder": 6
+      },
+      "filename": "image-05-model-evening-neutral.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a photorealistic NURA soft-luxury jewelry model wearing image for Model wearing image: evening neutral.\nInput image: image/暖白产品图/BB22-product-warmwhite.jpg is the exact product identity reference. Preserve the jewelry category, silhouette, gemstone placement, metal tone, proportions, and recognisable product details.\nSubject: 925 Silver Pink Bow Gemstone Necklace, Necklace, SKU NURA-NEC-SEED-BB22, published product.\nScene/backdrop: editorial model wearing the jewelry with a black or ivory evening outfit, warm indoor light, understated luxury, accessory clearly visible, refined and realistic.\nBrand style: warm white, ivory, soft beige, clean gold accents, modern Middle Eastern feminine elegance, realistic editorial photography, premium but understated.\nComposition: no headline, no caption text, no discount badge, no watermark. The image should look like a real Instagram feed photo, not a graphic poster.\nModel requirements when applicable: realistic adult model, tasteful close crop, accessory clearly worn in the correct place for its category, natural skin texture, no exaggerated glam retouching.\nScene requirements when applicable: varied props and environments across the set, product naturally integrated into the scene, not pasted onto a blank square.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category, unreadable hands, distorted ears, distorted neck, distorted jewelry.",
+      "slot": "Model wearing image: evening neutral",
+      "pillar": "Brand Trust"
+    },
+    {
+      "path": "outputs/social-drafts/2026-06-17-cutout-realassets/NURA-NEC-SEED-BB22/image-06-model-styling-detail.png",
+      "provider": "existing-model-wear",
+      "needsReview": true,
+      "supportingImage": {
+        "id": "cmqhol76v001l0otks0nrxdyw",
+        "type": "MODEL_WEAR",
+        "path": "image/模特佩戴图/BB22-model-wear-01.jpg",
+        "approved": false,
+        "sortOrder": 5
+      },
+      "filename": "image-06-model-styling-detail.png",
+      "prompt": "Use case: ads-marketing\nAsset type: Instagram and Facebook 4:5 feed image, 1080x1350 final crop\nPrimary request: Create a photorealistic NURA soft-luxury jewelry model wearing image for Model wearing image: styling detail.\nInput image: image/暖白产品图/BB22-product-warmwhite.jpg is the exact product identity reference. Preserve the jewelry category, silhouette, gemstone placement, metal tone, proportions, and recognisable product details.\nSubject: 925 Silver Pink Bow Gemstone Necklace, Necklace, SKU NURA-NEC-SEED-BB22, published product.\nScene/backdrop: detail crop of the jewelry being worn while adjusting a sleeve, hair, neckline, or hand pose depending on jewelry category, soft neutral background, natural lifestyle editorial photo.\nBrand style: warm white, ivory, soft beige, clean gold accents, modern Middle Eastern feminine elegance, realistic editorial photography, premium but understated.\nComposition: no headline, no caption text, no discount badge, no watermark. The image should look like a real Instagram feed photo, not a graphic poster.\nModel requirements when applicable: realistic adult model, tasteful close crop, accessory clearly worn in the correct place for its category, natural skin texture, no exaggerated glam retouching.\nScene requirements when applicable: varied props and environments across the set, product naturally integrated into the scene, not pasted onto a blank square.\nAvoid: black heavy luxury background, saturated colors, red discount visuals, cheap collage, sparkle rain, exaggerated filters, product deformation, fake extra stones, incorrect jewelry category, unreadable hands, distorted ears, distorted neck, distorted jewelry.",
+      "slot": "Model wearing image: styling detail",
+      "pillar": "Conversion Posts"
+    }
+  ]
+}
