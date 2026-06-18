@@ -22,58 +22,63 @@ const imageCandidates = [
 ];
 
 const rawExtensions = [".jpg", ".jpeg", ".png", ".webp"];
+const requiredProductImageTypes = ["WARMWHITE", "DETAIL", "SCENE", "MODEL_WEAR"];
 
 const source = JSON.parse(await fs.readFile(productsPath, "utf8"));
 
-for (const item of source) {
-  const sourceCode = String(item["款号"] || "").trim();
-  if (!sourceCode) continue;
+await prisma.$transaction(async (tx) => {
+  for (const item of source) {
+    const sourceCode = String(item["款号"] || "").trim();
+    if (!sourceCode) continue;
 
-  const name = String(item["产品名称"] || inferName(sourceCode)).trim();
-  const category = inferCategory(name);
-  const purchasePrice = Number(item["成本价"] || 0);
-  const shippingFee = 120;
-  const packagingFee = 30;
-  const pricing = calculatePricing({ purchasePrice, shippingFee, packagingFee });
-  const copy = copyForProduct({ sourceCode, name, category });
-  const sku = `NURA-${category.code}-SEED-${sourceCode}`;
-  const images = await collectImages(sourceCode, name);
-  const hasPublicProductImage = images.some((image) => image.approved);
+    const name = String(item["产品名称"] || inferName(sourceCode)).trim();
+    const category = inferCategory(name);
+    const purchasePrice = Number(item["成本价"] || 0);
+    const shippingFee = 120;
+    const packagingFee = 30;
+    const pricing = calculatePricing({ purchasePrice, shippingFee, packagingFee });
+    const copy = copyForProduct({ sourceCode, name, category });
+    const sku = `NURA-${category.code}-SEED-${sourceCode}`;
+    const images = await collectImages(sourceCode, name);
+    const hasCompleteImageSet = requiredProductImageTypes.every((type) =>
+      images.some((image) => image.type === type)
+    );
 
-  await prisma.product.upsert({
-    where: { sku },
-    update: {
-      sourceCode,
-      category: category.value,
-      name,
-      description: descriptionFor(name, category.label),
-      ...copy,
-      purchasePrice,
-      shippingFee,
-      packagingFee,
-      ...pricing,
-      status: hasPublicProductImage ? "ACTIVE" : "DRAFT",
-      images: {
-        deleteMany: {},
-        create: images
+    await tx.product.upsert({
+      where: { sku },
+      update: {
+        sourceCode,
+        category: category.value,
+        name,
+        description: descriptionFor(name, category.label),
+        ...copy,
+        purchasePrice,
+        shippingFee,
+        packagingFee,
+        ...pricing,
+        status: hasCompleteImageSet ? "ACTIVE" : "DRAFT",
+        images: {
+          deleteMany: {},
+          create: images
+        }
+      },
+      create: {
+        sku,
+        sourceCode,
+        category: category.value,
+        name,
+        description: descriptionFor(name, category.label),
+        ...copy,
+        purchasePrice,
+        shippingFee,
+        packagingFee,
+        ...pricing,
+        status: hasCompleteImageSet ? "ACTIVE" : "DRAFT",
+        images: { create: images }
       }
-    },
-    create: {
-      sku,
-      sourceCode,
-      category: category.value,
-      name,
-      description: descriptionFor(name, category.label),
-      ...copy,
-      purchasePrice,
-      shippingFee,
-      packagingFee,
-      ...pricing,
-      status: hasPublicProductImage ? "ACTIVE" : "DRAFT",
-      images: { create: images }
-    }
-  });
-}
+    });
+  }
+}, { maxWait: 10_000, timeout: 60_000 });
 
 console.log(`Seeded ${source.length} NURA products.`);
 await prisma.$disconnect();
@@ -161,6 +166,26 @@ function designCopy(name, sourceCode) {
       arDetail: "أحجاراً خضراء زمردية محاطة بفصوص شفافة ضمن إطار فضي مصقول"
     };
   }
+  if (/BB10/.test(sourceCode)) {
+    return {
+      enTitle: "Golden Yellow Geometric Gemstone",
+      arTitle: "بحجر أصفر ذهبي بتصميم هندسي",
+      enShort: "Square golden-yellow gemstones are framed by clear baguette and round stones for a crisp geometric shine.",
+      arShort: "أحجار مربعة بلون أصفر ذهبي تحيط بها فصوص باغيت ودائرية شفافة لبريق هندسي أنيق.",
+      enDetail: "square golden-yellow center stones, clear baguette side accents, round corner clusters, and polished silver settings",
+      arDetail: "أحجاراً مركزية مربعة باللون الأصفر الذهبي مع فصوص باغيت جانبية وتجمعات دائرية عند الزوايا ضمن إطار فضي مصقول"
+    };
+  }
+  if (/BB24/.test(sourceCode)) {
+    return {
+      enTitle: "Blush Pink Pear Halo Gemstone",
+      arTitle: "بحجر وردي كمثري وهالة مزدوجة",
+      enShort: "A blush-pink pear gemstone is framed by a rose-gold pink inner halo and a clear silver outer halo.",
+      arShort: "حجر وردي ناعم بقصة كمثرية تحيط به هالة داخلية وردية بلون الذهب الوردي وهالة خارجية شفافة فضية.",
+      enDetail: "a blush-pink pear-cut center stone, a scalloped rose-gold pink inner halo, a clear round-stone outer halo, and a three-stone connector",
+      arDetail: "حجراً مركزياً وردياً بقصة كمثرية وهالة داخلية وردية متعرجة بلون الذهب الوردي وهالة خارجية من الفصوص الشفافة مع وصلة ثلاثية الأحجار"
+    };
+  }
   if (/BB30/.test(sourceCode)) {
     return {
       enTitle: "Royal Blue Halo Gemstone",
@@ -169,6 +194,46 @@ function designCopy(name, sourceCode) {
       arShort: "حجر أزرق ملكي عميق تحيط به فصوص شفافة لإطلالة أنثوية مصقولة.",
       enDetail: "a deep blue center stone, a clear halo, and a delicate chain",
       arDetail: "حجراً أزرق عميقاً محاطاً بفصوص شفافة مع سلسلة رقيقة"
+    };
+  }
+  if (/BB66/.test(sourceCode)) {
+    return {
+      enTitle: "Aqua Blue Halo Gemstone",
+      arTitle: "بحجر أزرق مائي محاط بفصوص لامعة",
+      enShort: "A vivid aqua-blue center gemstone is framed by a clear halo and refined pavé shoulders.",
+      arShort: "حجر مركزي أزرق مائي لافت تحيط به هالة شفافة مع جوانب مرصعة بفصوص دقيقة.",
+      enDetail: "an aqua-blue oval-round center stone, a clear round-stone halo, split pavé shoulders, and a polished silver band",
+      arDetail: "حجراً مركزياً أزرق مائياً بقصة بيضاوية مستديرة وهالة من الفصوص الشفافة مع جوانب مزدوجة مرصعة وإطار فضي مصقول"
+    };
+  }
+  if (/BB84/.test(sourceCode)) {
+    return {
+      enTitle: "Oval Clear Halo Gemstone",
+      arTitle: "بحجر شفاف بيضاوي وهالة لامعة",
+      enShort: "An elongated clear oval center stone is framed by a delicate halo and refined pavé shoulders.",
+      arShort: "حجر مركزي شفاف بقصة بيضاوية طويلة تحيط به هالة ناعمة مع جوانب مرصعة بفصوص دقيقة.",
+      enDetail: "an elongated clear oval center stone, a fine round-stone halo, slim pavé shoulders, and a polished silver-tone band",
+      arDetail: "حجراً مركزياً شفافاً بقصة بيضاوية طويلة وهالة دقيقة من الفصوص الدائرية مع جوانب مرصعة وإطار مصقول بلون فضي"
+    };
+  }
+  if (/BB54/.test(sourceCode)) {
+    return {
+      enTitle: "Royal Blue Pear Double-Halo Drop",
+      arTitle: "متدلية بحجر أزرق ملكي كمثري وهالة مزدوجة",
+      enShort: "Deep royal-blue pear gemstones are framed by connected clear-stone drop settings for an elegant evening accent.",
+      arShort: "أحجار زرقاء ملكية بقصة كمثرية تحيط بها طبقات من الفصوص الشفافة لإطلالة مسائية أنيقة.",
+      enDetail: "deep royal-blue pear-cut center stones, connected clear-stone inner and outer pear settings, articulated connectors, and clear-stone stud tops",
+      arDetail: "أحجاراً مركزية زرقاء ملكية بقصة كمثرية وإطارات داخلية وخارجية مترابطة مرصعة بفصوص شفافة مع وصلات متحركة وأجزاء علوية مرصعة"
+    };
+  }
+  if (/BB65/.test(sourceCode)) {
+    return {
+      enTitle: "Clear Pavé Cluster",
+      arTitle: "مرصع بتجمعات من الفصوص الشفافة",
+      enShort: "A dense line of clear stones creates a delicate textured brilliance for everyday styling.",
+      arShort: "صف كثيف من الفصوص الشفافة يمنح لمعاناً ناعماً وملمساً أنيقاً للإطلالات اليومية.",
+      enDetail: "a dense alternating line of clear round stones, a flexible central section, fine chain ends, and an adjustable extension",
+      arDetail: "صفاً كثيفاً ومتدرجاً من الفصوص الدائرية الشفافة وقسماً مركزياً مرناً مع أطراف سلسلة رفيعة ووصلة قابلة للتعديل"
     };
   }
   if (/红钻|red/i.test(name)) {
@@ -244,6 +309,10 @@ async function collectImages(sourceCode, name) {
 }
 
 async function findRaw(sourceCode) {
+  if (sourceCode === "BB84") {
+    const currentReference = path.join("image", "珠宝拍摄图片", "BB84.png");
+    if (await exists(path.join(root, currentReference))) return currentReference;
+  }
   for (const ext of rawExtensions) {
     const relative = path.join("image", "珠宝拍摄图片", `${sourceCode}${ext}`);
     if (await exists(path.join(root, relative))) return relative;

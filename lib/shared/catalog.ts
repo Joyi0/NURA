@@ -38,5 +38,7 @@ export function imageTypeLabel(type: ImageType) {
 }
 
 export function assetUrl(path?: string | null) {
-  return path ? `/api/assets?path=${encodeURIComponent(path)}` : "/placeholder.svg";
+  if (!path) return "/placeholder.svg";
+  if (/^https?:\/\//i.test(path)) return path;
+  return `/api/assets?path=${encodeURIComponent(path)}`;
 }

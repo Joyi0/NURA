@@ -6,8 +6,13 @@ const prisma = new PrismaClient();
 const root = process.cwd();
 
 const sources = [
-  { type: "SCENE", folder: "场景图", pattern: /^(BB\d+)-scene-(\d+)\.(jpe?g|png|webp)$/i },
-  { type: "MODEL_WEAR", folder: "模特佩戴图", pattern: /^(BB\d+)-model-wear-(\d+)\.(jpe?g|png|webp)$/i }
+  { type: "SCENE", folder: "场景图", pattern: /^(BB\d+)-scene-(\d+)\.(jpe?g|png|webp)$/i, approved: false },
+  {
+    type: "MODEL_WEAR",
+    folder: "模特佩戴图",
+    pattern: /^(BB\d+)-model-wear-(\d+)\.(jpe?g|png|webp)$/i,
+    approved: false
+  }
 ];
 
 let created = 0;
@@ -42,7 +47,7 @@ for (const source of sources) {
         where: { id: existing.id },
         data: {
           type: source.type,
-          approved: true,
+          approved: source.approved,
           sortOrder,
           alt: product.name
         }
@@ -54,7 +59,7 @@ for (const source of sources) {
           productId: product.id,
           type: source.type,
           path: relativePath,
-          approved: true,
+          approved: source.approved,
           sortOrder,
           alt: product.name
         }

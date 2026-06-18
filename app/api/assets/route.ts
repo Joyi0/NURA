@@ -9,6 +9,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const requested = url.searchParams.get("path");
   if (!requested) return new Response("Missing path", { status: 400 });
+  if (/^https?:\/\//i.test(requested)) return Response.redirect(requested);
 
   if (!requested.startsWith("image/")) return new Response("Forbidden", { status: 403 });
 

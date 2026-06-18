@@ -5,7 +5,14 @@ node_modules
 dist
 dev.db
 dev.db-journal
+generated/
+*.tsbuildinfo
+outputs/.image-generation/
+outputs/.image-publish/
+outputs/image-staging/
 *.log
 .DS_Store
 **/.DS_Store
 .idea/
+.vercel
+.env*

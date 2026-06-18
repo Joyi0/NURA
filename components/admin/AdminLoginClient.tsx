@@ -7,11 +7,11 @@ export function AdminLoginClient() {
         <form className="form-grid" action="/api/admin/login" method="post">
           <div className="field">
             <label>账号</label>
-            <input name="username" defaultValue="admin" autoComplete="username" />
+            <input name="username" autoComplete="username" required />
           </div>
           <div className="field">
             <label>密码</label>
-            <input name="password" type="password" autoComplete="current-password" />
+            <input name="password" type="password" autoComplete="current-password" required />
           </div>
           <button className="btn" type="submit">
             登录后台
