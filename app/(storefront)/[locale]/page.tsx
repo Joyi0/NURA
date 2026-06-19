@@ -42,6 +42,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <span key={item}>{item}</span>
             ))}
           </div>
+          <Link className="btn secondary" href={`/${locale}/about`}>
+            {t.nav.about}
+          </Link>
         </div>
         <div className="brand-story-images">
           {brandStoryImages.map((image, index) => (

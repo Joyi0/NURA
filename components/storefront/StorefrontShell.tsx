@@ -14,6 +14,7 @@ export function StorefrontShell({ children, locale }: { children: React.ReactNod
           <img src="/api/assets?path=image%2Flogo%2Flogo.png" alt="NURA" />
         </Link>
         <nav className="nav">
+          <Link href={`/${locale}/about`}>{t.nav.about}</Link>
           <Link href={`/${locale}/products`}>{t.nav.all}</Link>
           {categories.map((category) => (
             <Link href={`/${locale}/products?category=${category.value}`} key={category.value}>

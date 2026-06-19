@@ -12,7 +12,10 @@ model Product {
   id                String         @id @default(cuid())
   sku               String         @unique
   sourceCode        String?
+  legacyCode        String?        @unique
   category          ProductCategory
+  color             ProductColor   @default(UNKNOWN)
+  gemstoneType      GemstoneType   @default(UNKNOWN)
   name              String
   description       String
   titleEn           String?
@@ -26,6 +29,9 @@ model Product {
   stock             Int            @default(0)
   tags              String?
   collectionName    String?
+  certificateAuthority String?
+  certificateNumber String?
+  certificateUrl    String?
   purchasePrice     Float
   shippingFee       Float
   packagingFee      Float
@@ -92,6 +98,25 @@ enum ProductCategory {
   EARRING
   BRACELET
   RING
+  SET
+}
+
+enum ProductColor {
+  YELLOW
+  RED
+  PINK
+  BLUE
+  GREEN
+  COLORLESS
+  UNKNOWN
+}
+
+enum GemstoneType {
+  LAB_GROWN_DIAMOND
+  MOISSANITE
+  LAB_GROWN_COLORED_GEMSTONE
+  OTHER
+  UNKNOWN
 }
 
 enum ProductStatus {

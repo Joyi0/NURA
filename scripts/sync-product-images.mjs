@@ -76,6 +76,7 @@ async function findProduct(sourceCode) {
   return prisma.product.findFirst({
     where: {
       OR: [
+        { legacyCode: sourceCode },
         { sourceCode },
         { sku: { contains: sourceCode } },
         { name: { contains: sourceCode } }

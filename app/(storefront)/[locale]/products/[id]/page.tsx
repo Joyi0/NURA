@@ -4,7 +4,7 @@ import { assetUrl } from "@/lib/shared/catalog";
 import { formatAed } from "@/lib/shared/money";
 import { prisma } from "@/lib/shared/prisma";
 import { detailGalleryImages, localizedProductDescription, localizedProductName, mainImage, productAedPrice } from "@/lib/shared/products";
-import { categoryLabel, dictionary, isLocale } from "@/lib/storefront/i18n";
+import { categoryLabel, dictionary, gemstoneTypeLabel, isLocale, productColorLabel } from "@/lib/storefront/i18n";
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ locale: string; id: string }> }) {
   const { locale, id } = await params;
@@ -43,7 +43,20 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <span className="muted">{t.products.category}</span>
             <span>{categoryLabel(product.category, locale)}</span>
           </div>
+          <div>
+            <span className="muted">{t.products.color}</span>
+            <span>{productColorLabel(product.color, locale)}</span>
+          </div>
+          <div>
+            <span className="muted">{t.products.gemstone}</span>
+            <span>{gemstoneTypeLabel(product.gemstoneType, locale)}</span>
+          </div>
         </div>
+        {product.certificateAuthority?.toUpperCase() === "IGI" && product.certificateNumber && product.certificateUrl ? (
+          <a className="certificate-link" href={product.certificateUrl} target="_blank" rel="noreferrer">
+            IGI Certified · {product.certificateNumber}
+          </a>
+        ) : null}
         <AddToCartButton
           label={t.products.addToCart}
           addedLabel={t.products.addedToCart}

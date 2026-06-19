@@ -1,4 +1,4 @@
-import { ProductCategory, ProductStatus } from "@prisma/client";
+import { GemstoneType, ProductCategory, ProductColor, ProductStatus } from "@prisma/client";
 import { assertAdmin } from "@/lib/admin/auth";
 import { cnyToAed } from "@/lib/shared/money";
 import { calculatePricing } from "@/lib/shared/pricing";
@@ -19,10 +19,14 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   const pricing = calculatePricing({ purchasePrice, shippingFee, packagingFee });
   const category = body.category ? String(body.category) : product.category;
   const status = body.status ? String(body.status) : product.status;
+  const color = body.color ? String(body.color) : product.color;
+  const gemstoneType = body.gemstoneType ? String(body.gemstoneType) : product.gemstoneType;
   const priceAed = body.priceAed === "" || body.priceAed === undefined ? product.priceAed : numberOr(body.priceAed, -1);
   const stock = body.stock === "" || body.stock === undefined ? product.stock : numberOr(body.stock, -1);
 
   if (!Object.values(ProductCategory).includes(category as ProductCategory)) return Response.json({ error: "分类无效。" }, { status: 400 });
+  if (!Object.values(ProductColor).includes(color as ProductColor)) return Response.json({ error: "颜色无效。" }, { status: 400 });
+  if (!Object.values(GemstoneType).includes(gemstoneType as GemstoneType)) return Response.json({ error: "宝石类型无效。" }, { status: 400 });
   if (!Object.values(ProductStatus).includes(status as ProductStatus)) return Response.json({ error: "状态无效。" }, { status: 400 });
   if (priceAed !== null && priceAed < 0) return Response.json({ error: "AED 售价无效。" }, { status: 400 });
   if (stock < 0) return Response.json({ error: "库存无效。" }, { status: 400 });
@@ -31,6 +35,8 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     where: { id },
     data: {
       category: category as ProductCategory,
+      color: color as ProductColor,
+      gemstoneType: gemstoneType as GemstoneType,
       status: status as ProductStatus,
       name: body.name ? String(body.name).trim() : product.name,
       description: body.description ? String(body.description).trim() : product.description,
@@ -48,12 +54,27 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
       priceAed: priceAed ?? cnyToAed(pricing.price),
       stock: Math.floor(stock),
       tags: optionalText(body.tags, product.tags),
-      collectionName: optionalText(body.collectionName, product.collectionName)
+      collectionName: optionalText(body.collectionName, product.collectionName),
+      certificateAuthority: optionalText(body.certificateAuthority, product.certificateAuthority),
+      certificateNumber: optionalText(body.certificateNumber, product.certificateNumber),
+      certificateUrl: optionalUrl(body.certificateUrl, product.certificateUrl)
     },
     include: { images: { orderBy: { sortOrder: "asc" } } }
   });
 
   return Response.json({ product: updated });
+}
+
+function optionalUrl(value: unknown, fallback: string | null) {
+  if (value === undefined) return fallback;
+  const next = String(value || "").trim();
+  if (!next) return null;
+  try {
+    const url = new URL(next);
+    return url.protocol === "https:" ? url.toString() : fallback;
+  } catch {
+    return fallback;
+  }
 }
 
 export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {

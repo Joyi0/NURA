@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { assetUrl, categories, imageTypes, statuses } from "@/lib/shared/catalog";
+import { assetUrl, categories, gemstoneTypes, imageTypes, productColors, statuses } from "@/lib/shared/catalog";
 
 type ProductImage = {
   id: string;
@@ -14,7 +14,10 @@ type Product = {
   id: string;
   sku: string;
   sourceCode: string | null;
+  legacyCode: string | null;
   category: string;
+  color: string;
+  gemstoneType: string;
   name: string;
   description: string;
   purchasePrice: number;
@@ -32,6 +35,9 @@ type Product = {
   stock: number;
   tags: string | null;
   collectionName: string | null;
+  certificateAuthority: string | null;
+  certificateNumber: string | null;
+  certificateUrl: string | null;
   priceReviewStatus: string;
   status: string;
   images: ProductImage[];
@@ -40,6 +46,8 @@ type Product = {
 const initialForm = {
   name: "",
   category: "EARRING",
+  color: "UNKNOWN",
+  gemstoneType: "UNKNOWN",
   description: "",
   titleEn: "",
   titleAr: "",
@@ -50,6 +58,9 @@ const initialForm = {
   stock: "0",
   tags: "",
   collectionName: "",
+  certificateAuthority: "",
+  certificateNumber: "",
+  certificateUrl: "",
   purchasePrice: "0",
   shippingFee: "120",
   packagingFee: "30",
@@ -85,6 +96,7 @@ export function AdminClient({
         product.titleAr,
         product.sku,
         product.sourceCode,
+        product.legacyCode,
         product.category,
         category,
         product.material,
@@ -170,6 +182,28 @@ export function AdminClient({
     await loadProducts();
   }
 
+  async function assignCode(product: Product) {
+    if (form.color === "UNKNOWN" || form.gemstoneType === "UNKNOWN") {
+      setMessage("请先确认颜色、款式和宝石类型。");
+      return;
+    }
+    if (!window.confirm(`将为 ${product.legacyCode || product.sku} 分配新的颜色款式编号，确认继续？`)) return;
+    const response = await fetch(`/api/admin/products/${product.id}/assign-code`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ color: form.color, category: form.category, gemstoneType: form.gemstoneType })
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      setMessage(data.error || "编号分配失败");
+      return;
+    }
+    setMessage(`已分配新编号：${data.product.sku}`);
+    setEditingId(null);
+    setForm(initialForm);
+    await loadProducts();
+  }
+
   async function uploadImage(event: FormEvent<HTMLFormElement>, productId: string) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -223,6 +257,26 @@ export function AdminClient({
             </select>
           </div>
           <div className="field">
+            <label>颜色</label>
+            <select value={form.color} onChange={(event) => setForm({ ...form, color: event.target.value })}>
+              {productColors.map((color) => (
+                <option value={color.value} key={color.value}>
+                  {color.label}{color.code ? ` (${color.code})` : ""}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="field">
+            <label>宝石类型</label>
+            <select value={form.gemstoneType} onChange={(event) => setForm({ ...form, gemstoneType: event.target.value })}>
+              {gemstoneTypes.map((type) => (
+                <option value={type.value} key={type.value}>
+                  {type.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="field">
             <label>进货价</label>
             <input type="number" min="0" step="0.01" value={form.purchasePrice} onChange={(event) => setForm({ ...form, purchasePrice: event.target.value })} />
           </div>
@@ -253,6 +307,18 @@ export function AdminClient({
           <div className="field">
             <label>系列分组</label>
             <input value={form.collectionName} onChange={(event) => setForm({ ...form, collectionName: event.target.value })} />
+          </div>
+          <div className="field">
+            <label>证书机构</label>
+            <input value={form.certificateAuthority} onChange={(event) => setForm({ ...form, certificateAuthority: event.target.value })} placeholder="例如 IGI" />
+          </div>
+          <div className="field">
+            <label>证书编号</label>
+            <input value={form.certificateNumber} onChange={(event) => setForm({ ...form, certificateNumber: event.target.value })} />
+          </div>
+          <div className="field">
+            <label>证书验证链接</label>
+            <input type="url" value={form.certificateUrl} onChange={(event) => setForm({ ...form, certificateUrl: event.target.value })} placeholder="https://..." />
           </div>
           <div className="field">
             <label>描述</label>
@@ -289,6 +355,11 @@ export function AdminClient({
               }}
             >
               取消编辑
+            </button>
+          ) : null}
+          {selectedProduct && (selectedProduct.color === "UNKNOWN" || /^NURA-/.test(selectedProduct.sku)) ? (
+            <button className="btn secondary" type="button" onClick={() => assignCode(selectedProduct)}>
+              分配新编号
             </button>
           ) : null}
         </form>
@@ -371,6 +442,7 @@ export function AdminClient({
                         <strong>{product.name}</strong>
                         <p className="muted">{product.titleEn || "未填写英文标题"}</p>
                         <p className="muted">{product.sku}</p>
+                        {product.legacyCode ? <p className="muted">旧编号 {product.legacyCode}</p> : null}
                       </td>
                       <td>
                         <div>进货 ¥{product.purchasePrice}</div>
@@ -395,6 +467,11 @@ export function AdminClient({
                         <a className="btn secondary" href={`/nura-admin/products?edit=${product.id}`} onClick={() => edit(product)}>
                           编辑/上传
                         </a>{" "}
+                        {product.color === "UNKNOWN" || /^NURA-/.test(product.sku) ? (
+                          <button className="btn secondary" onClick={() => edit(product)}>
+                            待分配编号
+                          </button>
+                        ) : null}{" "}
                         <button className="btn secondary" onClick={() => deleteProduct(product.id)}>
                           删除
                         </button>
@@ -415,6 +492,8 @@ function productToForm(product: Product) {
   return {
     name: product.name,
     category: product.category,
+    color: product.color,
+    gemstoneType: product.gemstoneType,
     description: product.description,
     titleEn: product.titleEn || "",
     titleAr: product.titleAr || "",
@@ -425,6 +504,9 @@ function productToForm(product: Product) {
     stock: String(product.stock),
     tags: product.tags || "",
     collectionName: product.collectionName || "",
+    certificateAuthority: product.certificateAuthority || "",
+    certificateNumber: product.certificateNumber || "",
+    certificateUrl: product.certificateUrl || "",
     purchasePrice: String(product.purchasePrice),
     shippingFee: String(product.shippingFee),
     packagingFee: String(product.packagingFee),

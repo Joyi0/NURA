@@ -10,7 +10,8 @@ const categoryMap = [
   { test: /项链/, value: "NECKLACE", code: "NEC", label: "项链" },
   { test: /耳|耳钉|耳环/, value: "EARRING", code: "EAR", label: "耳环" },
   { test: /手链/, value: "BRACELET", code: "BRA", label: "手链" },
-  { test: /戒指/, value: "RING", code: "RIN", label: "戒指" }
+  { test: /戒指/, value: "RING", code: "RIN", label: "戒指" },
+  { test: /套装|组合/, value: "SET", code: "SET", label: "套装" }
 ];
 
 const imageCandidates = [
@@ -38,45 +39,61 @@ await prisma.$transaction(async (tx) => {
     const packagingFee = 30;
     const pricing = calculatePricing({ purchasePrice, shippingFee, packagingFee });
     const copy = copyForProduct({ sourceCode, name, category });
-    const sku = `NURA-${category.code}-SEED-${sourceCode}`;
+    const identity = confirmedIdentity(sourceCode);
+    const sku = identity?.code || `NURA-${category.code}-SEED-${sourceCode}`;
     const images = await collectImages(sourceCode, name);
     const hasCompleteImageSet = requiredProductImageTypes.every((type) =>
       images.some((image) => image.type === type)
     );
 
-    await tx.product.upsert({
-      where: { sku },
-      update: {
-        sourceCode,
-        category: category.value,
-        name,
-        description: descriptionFor(name, category.label),
-        ...copy,
-        purchasePrice,
-        shippingFee,
-        packagingFee,
-        ...pricing,
-        status: hasCompleteImageSet ? "ACTIVE" : "DRAFT",
-        images: {
-          deleteMany: {},
-          create: images
-        }
-      },
-      create: {
-        sku,
-        sourceCode,
-        category: category.value,
-        name,
-        description: descriptionFor(name, category.label),
-        ...copy,
-        purchasePrice,
-        shippingFee,
-        packagingFee,
-        ...pricing,
-        status: hasCompleteImageSet ? "ACTIVE" : "DRAFT",
-        images: { create: images }
+    const existing = await tx.product.findFirst({
+      where: {
+        OR: [
+          { legacyCode: sourceCode },
+          { sourceCode },
+          { sku: `NURA-${category.code}-SEED-${sourceCode}` },
+          ...(identity ? [{ sku: identity.code }] : [])
+        ]
       }
     });
+    const data = {
+        sourceCode,
+        legacyCode: sourceCode,
+        category: category.value,
+        color: identity?.color || "UNKNOWN",
+        gemstoneType: identity?.gemstoneType || "UNKNOWN",
+        name,
+        description: descriptionFor(name, category.label),
+        ...copy,
+        purchasePrice,
+        shippingFee,
+        packagingFee,
+        ...pricing,
+        status: hasCompleteImageSet ? "ACTIVE" : "DRAFT"
+    };
+    if (existing) {
+      await tx.product.update({
+        where: { id: existing.id },
+        data: {
+          ...data,
+          sku,
+          sourceCode: identity?.code || existing.sourceCode || sourceCode,
+          images: {
+            deleteMany: {},
+            create: images
+          }
+        }
+      });
+    } else {
+      await tx.product.create({
+        data: {
+          ...data,
+          sku,
+          sourceCode: identity?.code || sourceCode,
+          images: { create: images }
+        }
+      });
+    }
   }
 }, { maxWait: 10_000, timeout: 60_000 });
 
@@ -102,6 +119,21 @@ function inferCategory(name) {
 
 function inferName(sourceCode) {
   return `${sourceCode} NURA 轻奢珠宝`;
+}
+
+function confirmedIdentity(sourceCode) {
+  return {
+    BB01: { code: "BE01", color: "BLUE", gemstoneType: "LAB_GROWN_COLORED_GEMSTONE" },
+    BB02: { code: "GE01", color: "GREEN", gemstoneType: "LAB_GROWN_COLORED_GEMSTONE" },
+    BB22: { code: "PN01", color: "PINK", gemstoneType: "LAB_GROWN_COLORED_GEMSTONE" },
+    BB24: { code: "PN02", color: "PINK", gemstoneType: "LAB_GROWN_COLORED_GEMSTONE" },
+    BB30: { code: "BN01", color: "BLUE", gemstoneType: "LAB_GROWN_COLORED_GEMSTONE" },
+    BB54: { code: "BE02", color: "BLUE", gemstoneType: "LAB_GROWN_COLORED_GEMSTONE" },
+    BB65: { code: "DB01", color: "COLORLESS", gemstoneType: "UNKNOWN" },
+    BB66: { code: "BR01", color: "BLUE", gemstoneType: "LAB_GROWN_COLORED_GEMSTONE" },
+    BB69: { code: "RB01", color: "RED", gemstoneType: "LAB_GROWN_COLORED_GEMSTONE" },
+    BB84: { code: "DR01", color: "COLORLESS", gemstoneType: "UNKNOWN" }
+  }[sourceCode] || null;
 }
 
 function descriptionFor(name, category) {

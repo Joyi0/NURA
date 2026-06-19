@@ -1,4 +1,5 @@
-import { categories } from "./catalog";
+import type { Prisma, ProductCategory, ProductColor } from "@prisma/client";
+import { categories, productColors } from "./catalog";
 import { prisma } from "./prisma";
 
 export function calculatePricing(input: {
@@ -16,17 +17,32 @@ export function calculatePricing(input: {
   return { cost, rawSuggestedPrice, price, priceReviewStatus };
 }
 
-export async function generateSku(category: string) {
-  const code = categories.find((item) => item.value === category)?.code ?? "JWL";
-  const date = new Date();
-  const stamp = [
-    date.getFullYear(),
-    String(date.getMonth() + 1).padStart(2, "0"),
-    String(date.getDate()).padStart(2, "0")
-  ].join("");
-  const prefix = `NURA-${code}-${stamp}`;
-  const count = await prisma.product.count({ where: { sku: { startsWith: prefix } } });
-  return `${prefix}-${String(count + 1).padStart(3, "0")}`;
+export async function generateProductCode(
+  color: ProductColor,
+  category: ProductCategory,
+  tx: Prisma.TransactionClient | typeof prisma = prisma
+) {
+  const colorCode = productColors.find((item) => item.value === color)?.code;
+  const styleCode = categories.find((item) => item.value === category)?.code;
+  if (!colorCode || !styleCode) throw new Error("商品颜色和款式必须确认后才能生成编号。");
+
+  const prefix = `${colorCode}${styleCode}`;
+  const existing = await tx.product.findMany({
+    where: {
+      OR: [{ sku: { startsWith: prefix } }, { sourceCode: { startsWith: prefix } }]
+    },
+    select: { sku: true, sourceCode: true }
+  });
+  const max = existing.reduce((current, product) => {
+    const values = [product.sku, product.sourceCode || ""];
+    for (const value of values) {
+      const match = value.match(new RegExp(`^${prefix}(\\d{2,})$`));
+      if (match) current = Math.max(current, Number(match[1]));
+    }
+    return current;
+  }, 0);
+  if (max >= 99) throw new Error(`${prefix} 编号已达到两位流水上限。`);
+  return `${prefix}${String(max + 1).padStart(2, "0")}`;
 }
 
 function roundMoney(value: number) {

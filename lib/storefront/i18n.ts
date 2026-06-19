@@ -1,4 +1,4 @@
-import type { ProductCategory } from "@prisma/client";
+import type { GemstoneType, ProductCategory, ProductColor } from "@prisma/client";
 
 export type Locale = "en" | "ar";
 
@@ -33,6 +33,8 @@ export const dictionaries = {
       earring: "Earrings",
       bracelet: "Bracelets",
       ring: "Rings",
+      set: "Sets",
+      about: "About NURA",
       cart: "Cart",
       orderLookup: "Order Lookup"
     },
@@ -42,10 +44,10 @@ export const dictionaries = {
       intro:
         "Refined gold-tone jewelry for modern femininity, designed for everyday elegance and understated occasions.",
       brandStoryEyebrow: "About NURA",
-      brandStoryTitle: "Quiet luxury, shaped for modern Middle Eastern elegance.",
+      brandStoryTitle: "Built for women in the UAE, with transparency at every step.",
       brandStoryText:
-        "NURA pairs warm white visuals, soft gold light, and refined jewelry silhouettes for women who want everyday polish without excess. Each piece is presented for real styling moments: daily wear, thoughtful gifting, evening dressing, and calm rituals of getting ready.",
-      brandStoryStats: ["Warm white editorial visuals", "Gold-tone jewelry styling", "Everyday and gifting moments"],
+        "Through Mariam Al Noor, a clearly disclosed fictional digital brand character, NURA tells a story of independence rooted in Fujairah and shaped for contemporary life in the UAE. Our approach centers on direct manufacturing relationships, honest gemstone identification, and a future commitment to licensed programs serving women and children.",
+      brandStoryStats: ["Digital brand character", "Transparent gemstone information", "Future community commitment"],
       cta: "Explore New Arrivals",
       arrivalsTitle: "New Arrivals",
       arrivalsText: "Approved pieces are published automatically from the NURA product system.",
@@ -87,6 +89,10 @@ export const dictionaries = {
       searchButton: "Search",
       clearSearch: "Clear",
       searchResults: "{count} results for “{query}”",
+      color: "Color",
+      gemstone: "Gemstone",
+      allColors: "All colors",
+      allGemstones: "All gemstones",
       sku: "SKU",
       category: "Category",
       pricing: "Pricing Status",
@@ -137,6 +143,8 @@ export const dictionaries = {
       earring: "أقراط",
       bracelet: "أساور",
       ring: "خواتم",
+      set: "أطقم",
+      about: "عن NURA",
       cart: "السلة",
       orderLookup: "تتبع الطلب"
     },
@@ -145,10 +153,10 @@ export const dictionaries = {
       title: "NURA",
       intro: "مجوهرات بلون الذهب للمرأة العصرية، مصممة لأناقة يومية هادئة ومناسبات راقية.",
       brandStoryEyebrow: "عن NURA",
-      brandStoryTitle: "فخامة هادئة صُممت لأناقة المرأة العصرية في الشرق الأوسط.",
+      brandStoryTitle: "علامة تُبنى للمرأة في الإمارات بشفافية في كل خطوة.",
       brandStoryText:
-        "تجمع NURA بين الخلفيات الدافئة البيضاء والضوء الذهبي الناعم وتصاميم المجوهرات الراقية للمرأة التي تبحث عن لمسة يومية مصقولة بلا مبالغة. تُعرض كل قطعة لمواقف حقيقية: الإطلالات اليومية، الهدايا، المساء، ولحظات الاستعداد الهادئة.",
-      brandStoryStats: ["صور تحريرية دافئة وبيضاء", "تنسيق مجوهرات بلون الذهب", "لحظات يومية وهدايا راقية"],
+        "من خلال مريم النور، وهي شخصية رقمية خيالية موضحة بصدق، تروي NURA قصة استقلال تبدأ من الفجيرة وتواكب الحياة المعاصرة في الإمارات. يرتكز نهجنا على علاقات تصنيع مباشرة وتعريف واضح بالأحجار والتزام مستقبلي تجاه برامج مرخصة تخدم النساء والأطفال.",
+      brandStoryStats: ["شخصية رقمية للعلامة", "معلومات شفافة عن الأحجار", "التزام مجتمعي مستقبلي"],
       cta: "اكتشفي الجديد",
       arrivalsTitle: "وصل حديثا",
       arrivalsText: "تظهر القطع المعتمدة تلقائيا من نظام منتجات NURA.",
@@ -190,6 +198,10 @@ export const dictionaries = {
       searchButton: "بحث",
       clearSearch: "مسح",
       searchResults: "{count} نتيجة عن \"{query}\"",
+      color: "اللون",
+      gemstone: "نوع الحجر",
+      allColors: "كل الألوان",
+      allGemstones: "كل الأحجار",
       sku: "رمز المنتج",
       category: "الفئة",
       pricing: "حالة التسعير",
@@ -255,6 +267,11 @@ export const categoryCopy: Record<Locale, Record<ProductCategory, { label: strin
       label: "Rings",
       productName: "NURA Gemstone Ring",
       description: "A polished ring with soft luxury presence for everyday and occasion wear."
+    },
+    SET: {
+      label: "Sets",
+      productName: "NURA Jewelry Set",
+      description: "A coordinated jewelry set designed for considered gifting and polished occasion styling."
     }
   },
   ar: {
@@ -277,6 +294,11 @@ export const categoryCopy: Record<Locale, Record<ProductCategory, { label: strin
       label: "خواتم",
       productName: "خاتم NURA مرصع",
       description: "خاتم مصقول بحضور فاخر وهادئ للارتداء اليومي والمناسبات."
+    },
+    SET: {
+      label: "أطقم",
+      productName: "طقم مجوهرات NURA",
+      description: "طقم مجوهرات متناسق للهدايا الراقية وإطلالات المناسبات المصقولة."
     }
   }
 };
@@ -287,6 +309,52 @@ export function dictionary(locale: Locale) {
 
 export function categoryLabel(category: ProductCategory, locale: Locale) {
   return categoryCopy[locale][category].label;
+}
+
+const colorLabels: Record<Locale, Record<ProductColor, string>> = {
+  en: {
+    YELLOW: "Yellow",
+    RED: "Red",
+    PINK: "Pink",
+    BLUE: "Blue",
+    GREEN: "Green",
+    COLORLESS: "Colorless",
+    UNKNOWN: "To be confirmed"
+  },
+  ar: {
+    YELLOW: "أصفر",
+    RED: "أحمر",
+    PINK: "وردي",
+    BLUE: "أزرق",
+    GREEN: "أخضر",
+    COLORLESS: "عديم اللون",
+    UNKNOWN: "بانتظار التأكيد"
+  }
+};
+
+const gemstoneLabels: Record<Locale, Record<GemstoneType, string>> = {
+  en: {
+    LAB_GROWN_DIAMOND: "Laboratory-grown diamond",
+    MOISSANITE: "Moissanite",
+    LAB_GROWN_COLORED_GEMSTONE: "Laboratory-grown colored gemstone",
+    OTHER: "Other gemstone",
+    UNKNOWN: "To be confirmed"
+  },
+  ar: {
+    LAB_GROWN_DIAMOND: "ألماس مصنع مخبرياً",
+    MOISSANITE: "مويسانايت",
+    LAB_GROWN_COLORED_GEMSTONE: "حجر كريم ملون مصنع مخبرياً",
+    OTHER: "حجر كريم آخر",
+    UNKNOWN: "بانتظار التأكيد"
+  }
+};
+
+export function productColorLabel(color: ProductColor, locale: Locale) {
+  return colorLabels[locale][color];
+}
+
+export function gemstoneTypeLabel(type: GemstoneType, locale: Locale) {
+  return gemstoneLabels[locale][type];
 }
 
 export function productDisplayName(product: { sourceCode: string | null; category: ProductCategory }, locale: Locale) {

@@ -12,6 +12,7 @@
     "prisma:generate": "prisma generate && prisma generate --schema prisma/sqlite.prisma",
     "prisma:push": "prisma db push",
     "prisma:migrate:deploy": "prisma migrate deploy",
+    "sqlite:migrate:identity": "sqlite3 prisma/dev.db < prisma/sqlite-identity-migration.sql",
     "seed": "node prisma/seed.mjs",
     "preview:migrate-data": "node scripts/migrate-preview-data.mjs",
     "images:generate-four": "node scripts/generate-product-four-image-set.mjs",

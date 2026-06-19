@@ -1,10 +1,29 @@
-import type { ImageType, ProductCategory, ProductStatus } from "@prisma/client";
+import type { GemstoneType, ImageType, ProductCategory, ProductColor, ProductStatus } from "@prisma/client";
 
 export const categories: Array<{ value: ProductCategory; label: string; code: string }> = [
-  { value: "NECKLACE", label: "项链", code: "NEC" },
-  { value: "EARRING", label: "耳环", code: "EAR" },
-  { value: "BRACELET", label: "手链", code: "BRA" },
-  { value: "RING", label: "戒指", code: "RIN" }
+  { value: "EARRING", label: "耳钉", code: "E" },
+  { value: "NECKLACE", label: "项链", code: "N" },
+  { value: "RING", label: "戒指", code: "R" },
+  { value: "BRACELET", label: "手链", code: "B" },
+  { value: "SET", label: "套装", code: "S" }
+];
+
+export const productColors: Array<{ value: ProductColor; label: string; code: string }> = [
+  { value: "YELLOW", label: "黄色", code: "Y" },
+  { value: "RED", label: "红色", code: "R" },
+  { value: "PINK", label: "粉色", code: "P" },
+  { value: "BLUE", label: "蓝色", code: "B" },
+  { value: "GREEN", label: "绿色", code: "G" },
+  { value: "COLORLESS", label: "无色钻石类", code: "D" },
+  { value: "UNKNOWN", label: "待确认", code: "" }
+];
+
+export const gemstoneTypes: Array<{ value: GemstoneType; label: string }> = [
+  { value: "LAB_GROWN_DIAMOND", label: "培育钻石" },
+  { value: "MOISSANITE", label: "莫桑石" },
+  { value: "LAB_GROWN_COLORED_GEMSTONE", label: "培育彩色宝石" },
+  { value: "OTHER", label: "其他" },
+  { value: "UNKNOWN", label: "待确认" }
 ];
 
 export const statuses: Array<{ value: ProductStatus; label: string }> = [
@@ -27,6 +46,14 @@ export const imageTypes: Array<{ value: ImageType; label: string; folder: string
 
 export function categoryLabel(category: ProductCategory) {
   return categories.find((item) => item.value === category)?.label ?? category;
+}
+
+export function productColorLabel(color: ProductColor) {
+  return productColors.find((item) => item.value === color)?.label ?? color;
+}
+
+export function gemstoneTypeLabel(type: GemstoneType) {
+  return gemstoneTypes.find((item) => item.value === type)?.label ?? type;
 }
 
 export function statusLabel(status: ProductStatus) {

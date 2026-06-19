@@ -53,7 +53,7 @@ function imageWeight(type: string) {
 }
 
 function fallbackImagePath(product: Product, type: string) {
-  const code = product.sourceCode || product.sku.match(/BB\d+/i)?.[0] || product.name.match(/BB\d+/i)?.[0];
+  const code = product.legacyCode || product.sourceCode || product.sku.match(/BB\d+/i)?.[0] || product.name.match(/BB\d+/i)?.[0];
   if (!code) return null;
   const sourceCode = code.toUpperCase();
   const paths: Record<string, string> = {
